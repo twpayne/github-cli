@@ -8,20 +8,20 @@ import (
 )
 
 var (
-	getLatestReleaseCmd = &cobra.Command{
+	repositoryGetLatestReleaseCmd = &cobra.Command{
 		Use:     "get-latest-release",
 		Args:    cobra.NoArgs,
 		Short:   "Get latest release",
 		Aliases: []string{"glr"},
-		RunE:    makeRunE(runReposGetLatestRelease),
+		RunE:    makeRunE(runRepositoryGetLatestRelease),
 	}
 )
 
 func init() {
-	reposCmd.AddCommand(getLatestReleaseCmd)
+	repositoryCmd.AddCommand(repositoryGetLatestReleaseCmd)
 }
 
-func runReposGetLatestRelease(ctx context.Context, client *github.Client, args []string) (interface{}, error) {
+func runRepositoryGetLatestRelease(ctx context.Context, client *github.Client, args []string) (interface{}, error) {
 	rr, _, err := client.Repositories.GetLatestRelease(ctx, owner, repo)
 	return rr, err
 }

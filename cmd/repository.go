@@ -3,10 +3,10 @@ package cmd
 import "github.com/spf13/cobra"
 
 var (
-	reposCmd = &cobra.Command{
-		Use:     "repos",
-		Short:   "Manage repos",
-		Aliases: []string{"r"},
+	repositoryCmd = &cobra.Command{
+		Use:     "repository",
+		Short:   "Manage repositories",
+		Aliases: []string{"r", "repo"},
 	}
 
 	owner string
@@ -14,8 +14,8 @@ var (
 )
 
 func init() {
-	persistentFlags := reposCmd.PersistentFlags()
+	persistentFlags := repositoryCmd.PersistentFlags()
 	persistentFlags.StringVarP(&owner, "owner", "o", "", "owner")
 	persistentFlags.StringVarP(&repo, "repo", "r", "", "repo")
-	rootCmd.AddCommand(reposCmd)
+	rootCmd.AddCommand(repositoryCmd)
 }
