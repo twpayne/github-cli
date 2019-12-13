@@ -17,17 +17,18 @@ var (
 	}
 
 	repositoryDeleteRelease struct {
-		id int64
+		releaseID int64
 	}
 )
 
 func init() {
 	persistentFlags := repositoryDeleteReleaseCmd.PersistentFlags()
-	persistentFlags.Int64VarP(&repositoryDeleteRelease.id, "id", "i", 0, "id")
+	persistentFlags.Int64VarP(&repositoryDeleteRelease.releaseID, "release-id", "i", 0, "release id")
+	must(repositoryDeleteReleaseCmd.MarkPersistentFlagRequired("release-id"))
 	repositoryCmd.AddCommand(repositoryDeleteReleaseCmd)
 }
 
 func runRepositoryDeleteRelease(ctx context.Context, client *github.Client, args []string) (interface{}, error) {
-	_, err := client.Repositories.DeleteRelease(ctx, repository.owner, repository.repo, repositoryDeleteRelease.id)
+	_, err := client.Repositories.DeleteRelease(ctx, repository.owner, repository.repo, repositoryDeleteRelease.releaseID)
 	return noResult, err
 }

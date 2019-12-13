@@ -7,15 +7,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var (
-	repositoryGetLatestReleaseCmd = &cobra.Command{
-		Use:     "get-latest-release",
-		Args:    cobra.NoArgs,
-		Short:   "Get latest release",
-		Aliases: []string{"glr"},
-		RunE:    makeRunE(runRepositoryGetLatestRelease),
-	}
-)
+var repositoryGetLatestReleaseCmd = &cobra.Command{
+	Use:     "get-latest-release",
+	Args:    cobra.NoArgs,
+	Short:   "Get latest release",
+	Aliases: []string{"glr"},
+	RunE:    makeRunE(runRepositoryGetLatestRelease),
+}
 
 func init() {
 	repositoryCmd.AddCommand(repositoryGetLatestReleaseCmd)

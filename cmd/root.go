@@ -51,3 +51,9 @@ func makeRunE(runE func(context.Context, *github.Client, []string) (interface{},
 		return e.Encode(result)
 	}
 }
+
+func must(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
