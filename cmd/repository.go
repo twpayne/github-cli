@@ -3,6 +3,7 @@ package cmd
 import (
 	"context"
 	"os"
+	"path/filepath"
 
 	"github.com/google/go-github/v26/github"
 	"github.com/spf13/cobra"
@@ -38,7 +39,7 @@ func uploadReleaseAsset(ctx context.Context, client *github.Client, releaseID in
 	}
 	defer file.Close()
 	uploadOptions := github.UploadOptions{
-		Name:  arg,
+		Name:  filepath.Base(arg),
 		Label: label,
 	}
 	releaseAsset, _, err := client.Repositories.UploadReleaseAsset(ctx, repository.owner, repository.repo, releaseID, &uploadOptions, file)
