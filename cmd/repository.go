@@ -46,7 +46,7 @@ func uploadReleaseAsset(ctx context.Context, client *github.Client, releaseID in
 }
 
 func uploadReleaseAssets(ctx context.Context, client *github.Client, releaseID int64, label string, args []string) ([]*github.ReleaseAsset, error) {
-	var allReleaseAssets []*github.ReleaseAsset
+	allReleaseAssets := make([]*github.ReleaseAsset, 0, len(args))
 	var allErrors error
 	for _, arg := range args {
 		releaseAsset, err := uploadReleaseAsset(ctx, client, releaseID, label, arg)
@@ -54,5 +54,4 @@ func uploadReleaseAssets(ctx context.Context, client *github.Client, releaseID i
 		allErrors = multierr.Combine(allErrors, err)
 	}
 	return allReleaseAssets, allErrors
-
 }
