@@ -22,6 +22,6 @@ func init() {
 }
 
 func runRepositoryGetLatestRelease(ctx context.Context, client *github.Client, args []string) (interface{}, error) {
-	rr, _, err := client.Repositories.GetLatestRelease(ctx, owner, repo)
-	return rr, err
+	repositoryRelease, _, err := client.Repositories.GetLatestRelease(ctx, repository.owner, repository.repo)
+	return repositoryRelease, err
 }

@@ -9,13 +9,17 @@ var (
 		Aliases: []string{"r", "repo"},
 	}
 
-	owner string
-	repo  string
+	repository struct {
+		owner string
+		repo  string
+	}
 )
 
 func init() {
 	persistentFlags := repositoryCmd.PersistentFlags()
-	persistentFlags.StringVarP(&owner, "owner", "o", "", "owner")
-	persistentFlags.StringVarP(&repo, "repo", "r", "", "repo")
+	persistentFlags.StringVarP(&repository.owner, "owner", "o", "", "owner")
+	rootCmd.MarkFlagRequired("owner")
+	persistentFlags.StringVarP(&repository.repo, "repo", "r", "", "repo")
+	rootCmd.MarkFlagRequired("repo")
 	rootCmd.AddCommand(repositoryCmd)
 }

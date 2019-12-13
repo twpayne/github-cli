@@ -12,12 +12,17 @@ import (
 	"golang.org/x/oauth2"
 )
 
-var rootCmd = &cobra.Command{
-	Use:           "github-cli",
-	Short:         "Make GitHub API calls from the command line",
-	SilenceErrors: true,
-	SilenceUsage:  true,
-}
+var (
+	rootCmd = &cobra.Command{
+		Use:           "github-cli",
+		Short:         "Make GitHub API calls from the command line",
+		SilenceErrors: true,
+		SilenceUsage:  true,
+	}
+
+	noResultValue int
+	noResult      = &noResultValue
+)
 
 // Execute executes the root command.
 func Execute() {
@@ -38,7 +43,7 @@ func makeRunE(runE func(context.Context, *github.Client, []string) (interface{},
 		}
 		client := github.NewClient(httpClient)
 		result, err := runE(ctx, client, args)
-		if err != nil {
+		if err != nil || result == noResult {
 			return err
 		}
 		e := json.NewEncoder(os.Stdout)
