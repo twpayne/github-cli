@@ -26,9 +26,7 @@ var (
 func init() {
 	persistentFlags := repositoryCmd.PersistentFlags()
 	persistentFlags.StringVarP(&repository.owner, "owner", "o", "", "owner")
-	must(repositoryCmd.MarkPersistentFlagRequired("owner"))
 	persistentFlags.StringVarP(&repository.repo, "repo", "r", "", "repo")
-	must(repositoryCmd.MarkPersistentFlagRequired("repo"))
 	rootCmd.AddCommand(repositoryCmd)
 }
 
