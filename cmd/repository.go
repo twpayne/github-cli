@@ -13,7 +13,7 @@ import (
 var (
 	repositoryCmd = &cobra.Command{
 		Use:     "repository",
-		Short:   "Manage repositories",
+		Short:   "Manage a repository",
 		Aliases: []string{"r", "repo"},
 	}
 
